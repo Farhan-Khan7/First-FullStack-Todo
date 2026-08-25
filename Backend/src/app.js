@@ -13,10 +13,10 @@ module.exports = app;
 // todos POST API 
 
 app.post('/api/todo' , async (req , res) => {
-    const {task , priority , category} = req.body;
+    const {task , priority , category , completed} = req.body;
 
     const todos = await todoModel.create({
-        task , priority , category
+        task , priority , category , completed
     })
 
     res.status(201).json({
@@ -56,12 +56,13 @@ app.delete('/api/todo/:id' , async (req , res) => {
 app.patch('/api/todo/:id' , async (req ,res) => {
   
     const id = req.params.id;
-    const {task , priority , category} = req.body;
+    const {task , priority , category , completed} = req.body;
 
     const todos = await todoModel.findByIdAndUpdate(id,{
         task,
         priority,
-        category
+        category,
+        completed
     })
     
     res.status(200).json({
