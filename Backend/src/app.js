@@ -1,8 +1,10 @@
 const express = require('express');
 const todoModel = require('./models/todos.model')
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
 module.exports = app;
 
@@ -69,3 +71,4 @@ app.patch('/api/todo/:id' , async (req ,res) => {
 
 })
 
+ 
