@@ -1,0 +1,5 @@
+# Dependencies
+node_modules
+
+# kuch toh bolte hai isko abhi nahi pata hai
+.env
