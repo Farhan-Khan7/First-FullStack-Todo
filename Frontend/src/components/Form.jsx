@@ -1,14 +1,39 @@
 import React from "react";
 
-const Form = ({toggle , setToggle}) => {
+const Form = ({
+  toggle,
+  setToggle,
+  formData,
+  setFormData,
+  createTodos,
+  getTodos,
+}) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await createTodos(),
+    getTodos(),
+    setToggle(true);
+  };
+
   const fieldClass =
     "w-full appearance-none rounded-2xl border-0 bg-[#e9edf5] px-5 py-4 text-base text-[#293655] outline-none shadow-[inset_4px_4px_8px_#c2cad9,inset_-4px_-4px_8px_#ffffff] placeholder:text-[#71809f] focus:ring-2 focus:ring-[#d72e52]/35";
 
   return (
-    <div className={`${toggle ? `hidden` : `absolute`} inset-0 z-50 min-h-screen w-screen overflow-y-auto bg-[#dfe5f0]/65 px-4 py-12 backdrop-blur-md sm:px-8`}>
+    <div
+      className={`${toggle ? "hidden" : "absolute"} inset-0 z-50 min-h-screen w-screen overflow-y-auto bg-[#dfe5f0]/65 px-4 py-12 backdrop-blur-md sm:px-8`}
+    >
       <section className="relative mx-auto w-full max-w-4xl rounded-xl bg-[#e9edf5] px-6 py-10 font-sans text-[#293655] shadow-[13px_13px_25px_#aeb8ca,-13px_-13px_25px_#ffffff] sm:px-10 sm:py-12">
         <button
-            onClick={() => setToggle(true)}
+          onClick={() => setToggle(true)}
           type="button"
           aria-label="Close task form"
           className="cursor-pointer absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-xl bg-[#e9edf5] text-[#d72e52] shadow-[4px_4px_8px_#c2cad9,-4px_-4px_8px_#ffffff] transition hover:-translate-y-0.5 hover:shadow-[2px_2px_6px_#c2cad9,-2px_-2px_6px_#ffffff,0_0_14px_rgba(215,46,82,0.32)] focus:outline-none focus:ring-2 focus:ring-[#d72e52]/40"
@@ -29,10 +54,12 @@ const Form = ({toggle , setToggle}) => {
           Create &amp; Manage Task
         </h2>
 
-        <div className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <label className="block">
             <span className="mb-2 block text-sm font-bold">Task</span>
             <input
+              name="task"
+              onChange={handleChange}
               className={fieldClass}
               type="text"
               placeholder="What do you have planned"
@@ -41,7 +68,12 @@ const Form = ({toggle , setToggle}) => {
 
           <label className="block">
             <span className="mb-2 block text-sm font-bold">Priority</span>
-            <select className={fieldClass} defaultValue="">
+            <select
+              className={fieldClass}
+              defaultValue=""
+              name="priority"
+              onChange={handleChange}
+            >
               <option value="" disabled>
                 Select Priority
               </option>
@@ -53,7 +85,12 @@ const Form = ({toggle , setToggle}) => {
 
           <label className="block">
             <span className="mb-2 block text-sm font-bold">Category</span>
-            <select className={fieldClass} defaultValue="">
+            <select
+              className={fieldClass}
+              defaultValue=""
+              name="category"
+              onChange={handleChange}
+            >
               <option value="" disabled>
                 Select Category
               </option>
@@ -69,13 +106,13 @@ const Form = ({toggle , setToggle}) => {
           </label>
 
           <button
-          onClick={() => setToggle(true)}
+            // onClick={handleSubmit}
             className="w-full rounded-2xl bg-gradient-to-br from-[#ed476b] to-[#ac1839] px-5 py-4 text-base font-extrabold uppercase tracking-wide text-white shadow-[6px_6px_12px_#c2cad9,-4px_-4px_9px_#ffffff,0_0_18px_rgba(215,46,82,0.42)] transition hover:-translate-y-0.5 hover:shadow-[3px_3px_8px_#c2cad9,-3px_-3px_8px_#ffffff,0_0_24px_rgba(215,46,82,0.6)] focus:outline-none focus:ring-2 focus:ring-[#d72e52]/40"
-            type="button"
+            type="submit"
           >
             Add Task
           </button>
-        </div>
+        </form>
       </section>
     </div>
   );

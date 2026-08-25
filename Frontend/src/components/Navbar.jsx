@@ -1,12 +1,20 @@
 import React from 'react';
 
-const stats = [
-  { label: 'Total Task', value: 0 },
-  { label: 'Completed Task', value: 0 },
-  { label: 'Pending Task', value: 0 },
+
+
+const Navbar = ({toggle , setToggle , todos}) => {
+
+  const totalTodos = todos.filter((todo) => todo.completed === false).length;
+  const totalCompletedTodos = todos.filter((todo) => todo.completed === true).length
+  const totalPendingTodos = totalTodos
+
+  const stats = [
+  { label: 'Total Task', value: `${totalTodos}` },
+  { label: 'Completed Task', value: `${totalCompletedTodos}` },
+  { label: 'Pending Task', value: `${totalPendingTodos}` },
 ];
 
-const Navbar = ({toggle , setToggle}) => {
+
   return (
     <header className="my-2 flex items-center gap-5 rounded-xl bg-[#e9edf5] px-5 py-4 font-sans text-[#293655] shadow-[12px_12px_24px_#c2cad9,-12px_-12px_24px_#ffffff] sm:w-[calc(100%_-_3rem)] sm:px-7">
       <section className="flex flex-1 flex-col gap-4 sm:flex-row sm:items-center sm:gap-8" aria-label="Dashboard summary">
