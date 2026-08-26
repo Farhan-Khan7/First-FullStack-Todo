@@ -16,20 +16,20 @@ const App = () => {
   }); 
   
   const createTodos = async () => {
-    const data = await axios.post("http://localhost:8080/api/todo" , formData)
+    const data = await axios.post(`${import.meta.env.VITE_API_URL}/api/todo` , formData)
     
     console.log(data.data)
   }
 
   const  getTodos = async () => {
-    const data = await axios.get("http://localhost:8080/api/todo")
+    const data = await axios.get(`${import.meta.env.VITE_API_URL}/api/todo`)
     .then((res) => {
       setTodos(res.data.todos)
     })
   }
 
   const deleteTodos = async (id) =>{
-    const data = await axios.delete(`http://localhost:8080/api/todo/${id}`)
+    const data = await axios.delete(`${import.meta.env.VITE_API_URL}/api/todo/${id}`)
     .then((res) => {
       console.log(res.data.todos)
     })
@@ -37,7 +37,7 @@ const App = () => {
   }
 
   const completedTodos = async (id) => {
-    const data = await axios.patch(`http://localhost:8080/api/todo/${id}` , {
+    const data = await axios.patch(`${import.meta.env.VITE_API_URL}/api/todo/${id}` , {
       completed : true
     })
     .then((res) => {
