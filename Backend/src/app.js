@@ -10,7 +10,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://fullstack-todo-k50r.onrender.com",
+      "https://fullstack-todo-991a.onrender.com",
     ],
     credentials: true,
   }),
